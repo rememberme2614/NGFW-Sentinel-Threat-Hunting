@@ -16,7 +16,7 @@ This project demonstrates hands-on skills expected from a **SOC Analyst / Threat
 - **Firewall:** FortiGate-VM
 - **SIEM:** Microsoft Sentinel
 
-![Architecture](Architecture/Azure_NGFW_Diagram.png)
+![Architecture](references/cce1ee72-7340-4b57-99d1-cd7653dc13a5.png)
 
 ---
 
