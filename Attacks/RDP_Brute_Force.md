@@ -37,7 +37,7 @@ Nmap
 
 ### Command Executed
 ```bash
-nmap -sS -sV -p 3389 <Target_Public_IP>
+nmap -sS -sV -p 3389 98.70.99.156
 ````
 
 ### Reconnaissance Output
