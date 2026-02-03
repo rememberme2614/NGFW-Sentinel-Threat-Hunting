@@ -70,13 +70,13 @@ Hydra
 ### Command Executed
 
 ```bash
-hydra -L users.txt -P passwords.txt rdp://<Target_Public_IP>
+hydra -L users.txt -P passwords.txt rdp://98.70.99.156
 ```
 
 ### Brute Force in Progress
 
 ![Hydra Brute Force Running](../references/ActiveBF.png)
-![Hydra Brute Force Running](../references/SucessBF.png)
+
 
 ### Attacker Behavior
 
@@ -103,7 +103,7 @@ Hydra successfully identifies a valid username and password combination.
 
 ### Successful Password Crack Evidence
 
-![Hydra Password Cracked](../images/rdp_bruteforce/hydra_password_cracked.png)
+![Hydra Brute Force Running](../references/SucessBF.png)
 
 ### Attacker Outcome
 
@@ -165,12 +165,26 @@ FortiGate NGFW -> Log Analytics Workspace -> Microsoft Sentinel
 * IPS brute-force signature match
 * Abnormal authentication rate
 
+![IPS Blocked](../references/Failedlogon2.png)
+![IPS Blocked](../references/IPS_block.png)
+
+
 ### Investigation Steps
 
 * Correlated Nmap recon and Hydra brute-force activity
 * Built attack timeline
 * Verified unauthorized access attempt
 
+### Query (Microsoft Sentinel / Log Analytics)
+```kql
+SecurityEvent
+| where EventID == 4625
+| where LogonType == 10
+| summarize FailedAttempts = count()
+          by IpAddress, TargetUserName, Computer, bin(TimeGenerated, 5m)
+| where FailedAttempts > 5
+| sort by FailedAttempts desc
+```
 ---
 
 ## Phase 6 – Incident Response & Containment
@@ -223,23 +237,3 @@ FortiGate NGFW -> Log Analytics Workspace -> Microsoft Sentinel
 
 This lab demonstrates a complete threat hunting workflow, showcasing how RDP brute-force attacks are executed, detected, investigated, and mitigated in a cloud environment.
 
-```
-
----
-
-## 🔥 Why this is VERY strong now
-✔ Visual proof of attack  
-✔ End-to-end attacker → defender story  
-✔ Recruiter & interviewer friendly  
-✔ Looks like **real SOC case documentation**
-
----
-
-If you want next, I strongly recommend:
-- 📸 Sentinel alert screenshots
-- 📸 FortiGate IPS log screenshot
-- 📄 `Detections/Sentinel_KQL_RDP.md`
-- 📄 Resume bullets derived from this
-
-Just say **what’s next** 🚀
-```
