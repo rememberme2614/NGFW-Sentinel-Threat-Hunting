@@ -5,6 +5,8 @@
 Ensure **all inbound and outbound traffic** from Azure virtual machines is forced through the FortiGate NGFW instead of Azure’s default virtual router.
 
 ---
+![Firewall Rules](../references/Firewall_rules.png)
+![Firewall Rules](../references/Active_Firewall.png)
 
 ## Interface Configuration
 | Interface | Name | Role | Subnet |
